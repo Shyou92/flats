@@ -3,7 +3,12 @@ import {
   getHouseNumberData,
   getStreetsData,
 } from '../shared/utils';
-import { GET_FLATSNUMBER, GET_HOUSENUMBER, GET_STREETS } from './types';
+import {
+  GET_FLATSNUMBER,
+  GET_HOUSENUMBER,
+  GET_STREETS,
+  GET_SINGLEFLATNUMBER,
+} from './types';
 
 export function fetchStreets() {
   return async (dispatch) => {
@@ -23,5 +28,14 @@ export function fetchFlatsNumbers(id) {
   return async (dispatch) => {
     const response = await getFlatsNumberData(id);
     dispatch({ type: GET_FLATSNUMBER, payload: response });
+  };
+}
+
+export function getFlatNumber(id) {
+  return {
+    type: GET_SINGLEFLATNUMBER,
+    payload: {
+      id,
+    },
   };
 }

@@ -4,9 +4,12 @@ import {
   fetchFlatsNumbers,
   fetchHouseNumbers,
   fetchStreets,
+  getFlatNumber,
 } from '../../redux/actions';
 
 const AddressList = () => {
+  const dispatch = useDispatch();
+
   const streets = useSelector((state) => {
     return state.streets.streets;
   });
@@ -40,7 +43,16 @@ const AddressList = () => {
     return;
   };
 
-  const dispatch = useDispatch();
+  const handleFlatNumbers = (e) => {
+    if (flatsNumbers.length === 0) {
+      return;
+    }
+    flatsNumbers.filter((flatNumber) => {
+      if (flatNumber.flat === e.target.value) {
+        dispatch(getFlatNumber(flatNumber.id));
+      }
+    });
+  };
 
   useEffect(() => {
     dispatch(fetchStreets());
@@ -68,7 +80,7 @@ const AddressList = () => {
           return <option key={number.id}>{number.name}</option>;
         })}
       </select>
-      <select name='flatsNumbers' id=''>
+      <select name='flatsNumbers' id='' onChange={handleFlatNumbers}>
         <option value=''>Кв./Офис</option>
         {flatsNumbers.map((number) => {
           return <option key={number.id}>{number.name}</option>;

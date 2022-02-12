@@ -1,16 +1,12 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchFlatsNumbers,
-  fetchHouseNumbers,
-  fetchStreets,
-} from '../redux/actions';
+import React from 'react';
 import AddressList from '../entities/addressList/addressList';
+import ClientList from '../entities/clientList/clientList';
 
 function App() {
   return (
     <div className='App'>
       <AddressList />
+      <ClientList />
     </div>
   );
 }
