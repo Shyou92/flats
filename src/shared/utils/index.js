@@ -24,8 +24,8 @@ export const getStreetsData = async () => {
   return getResponseData(res);
 };
 
-export const getHouseNumberData = async () => {
-  const res = await fetch(`${BASE_URL}/Request/houses/30`, {
+export const getHouseNumberData = async (id) => {
+  const res = await fetch(`${BASE_URL}/Request/houses/${id}`, {
     method: 'GET',
     headers: {
       'content-Type': 'application/json',
@@ -38,8 +38,8 @@ export const getHouseNumberData = async () => {
   return getResponseData(res);
 };
 
-export const getFlatsNumberData = async () => {
-  const res = await fetch(`${BASE_URL}/Request/house_flats/10`, {
+export const getFlatsNumberData = async (id) => {
+  const res = await fetch(`${BASE_URL}/Request/house_flats/${id}`, {
     method: 'GET',
     headers: {
       'content-Type': 'application/json',

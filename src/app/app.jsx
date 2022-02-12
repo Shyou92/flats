@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchFlatsNumbers,
   fetchHouseNumbers,
@@ -8,14 +8,6 @@ import {
 import AddressList from '../entities/addressList/addressList';
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchStreets());
-    dispatch(fetchHouseNumbers());
-    dispatch(fetchFlatsNumbers());
-  }, [dispatch]);
-
   return (
     <div className='App'>
       <AddressList />

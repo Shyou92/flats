@@ -12,16 +12,16 @@ export function fetchStreets() {
   };
 }
 
-export function fetchHouseNumbers() {
+export function fetchHouseNumbers(id) {
   return async (dispatch) => {
-    const response = await getHouseNumberData();
+    const response = await getHouseNumberData(id);
     dispatch({ type: GET_HOUSENUMBER, payload: response });
   };
 }
 
-export function fetchFlatsNumbers() {
+export function fetchFlatsNumbers(id) {
   return async (dispatch) => {
-    const response = await getFlatsNumberData();
+    const response = await getFlatsNumberData(id);
     dispatch({ type: GET_FLATSNUMBER, payload: response });
   };
 }
