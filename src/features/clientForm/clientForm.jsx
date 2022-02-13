@@ -37,8 +37,8 @@ const ClientForm = () => {
     try {
       const sendClientData = await postClientData(data, singleFlatNumber);
       const newData = {
-        ...data,
         id: sendClientData.id,
+        ...data,
       };
       dispatch(addNewTenant(newData));
       dispatch(getClientId(sendClientData.id));

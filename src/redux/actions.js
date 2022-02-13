@@ -49,12 +49,9 @@ export function getFlatNumber(id) {
 }
 
 export function addNewTenant(data) {
-  console.log(data);
   return {
     type: SET_NEWTENANT,
-    payload: {
-      data,
-    },
+    payload: data,
   };
 }
 
@@ -70,8 +67,6 @@ export function getClientId(id) {
 export function getClientsList(data) {
   return {
     type: GET_CLIENTSLIST,
-    payload: {
-      data,
-    },
+    payload: data,
   };
 }

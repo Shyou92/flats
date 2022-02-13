@@ -12,7 +12,7 @@ const ClientList = () => {
   });
 
   const tenantsList = useSelector((state) => {
-    return state.clients.clients.data;
+    return state.clients.clients;
   });
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const ClientList = () => {
     const fetch = await getTenantsData(singleFlatNumber.id);
     dispatch(getClientsList(fetch));
   };
-  console.log(tenantsList);
+
   return (
     <section>
       {tenantsList === undefined ? (

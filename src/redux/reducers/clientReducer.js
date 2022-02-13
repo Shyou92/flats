@@ -14,9 +14,12 @@ export const clientReducer = (state = initialState, action) => {
       return { ...state, clients: action.payload };
     }
     case SET_NEWTENANT: {
+      const updateState = [...state.clients];
+      updateState.push(action.payload);
+      state.clients = updateState;
       return {
         ...state,
-        clients: action.payload,
+        updateState,
       };
     }
     default:
