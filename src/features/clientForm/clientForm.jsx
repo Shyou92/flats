@@ -18,9 +18,9 @@ const ClientForm = () => {
     return state.flats.singleFlat;
   });
 
-  const tenantsList = useSelector((state) => {
-    return state.clients.clients.data;
-  });
+  // const tenantsList = useSelector((state) => {
+  //   return state.clients.clients.data;
+  // });
 
   const onChange = (e) => {
     const { name } = e.target;
