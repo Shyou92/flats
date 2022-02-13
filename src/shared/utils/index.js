@@ -57,7 +57,7 @@ export const postClientData = async (data, id) => {
     method: 'POST',
     headers: {
       'content-Type': 'application/json',
-      accept: 'application/json',
+      accept: 'text/plain',
       Authorization: `Bearer ${jwt}`,
       'Access-Control-Allow-Origin': 'http://localhost:3000',
       Vary: 'Origin',
@@ -65,4 +65,52 @@ export const postClientData = async (data, id) => {
     body: JSON.stringify(data, id),
   });
   return getResponseData(res);
+  // console.log(res);
+  // const newData = await {
+  //   data,
+  //   id,
+  // };
+  // return newData;
 };
+
+export const changeClientData = async (data) => {
+  const res = await fetch(`${BASE_URL}/HousingStock/bind_client`, {
+    method: 'PUT',
+    headers: {
+      'content-Type': 'application/json',
+      accept: 'application/json',
+      Authorization: `Bearer ${jwt}`,
+      'Access-Control-Allow-Origin': 'http://localhost:3000',
+      Vary: 'Origin',
+    },
+    body: JSON.stringify(data),
+  });
+  return getResponseData(res);
+};
+
+export const getTenantsData = async (id) => {
+  const res = await fetch(`${BASE_URL}/HousingStock/clients?addressId=${id}`, {
+    method: 'GET',
+    headers: {
+      'content-Type': 'application/json',
+      accept: 'application/json',
+      Authorization: `Bearer ${jwt}`,
+      'Access-Control-Allow-Origin': 'http://localhost:3000',
+      Vary: 'Origin',
+    },
+  });
+  return getResponseData(res);
+};
+// export const getStreetsData = async () => {
+//   const res = await fetch(`${BASE_URL}/Request/streets`, {
+//     method: 'GET',
+//     headers: {
+//       'content-Type': 'application/json',
+//       accept: 'application/json',
+//       Authorization: `Bearer ${jwt}`,
+//       'Access-Control-Allow-Origin': 'http://localhost:3000',
+//       Vary: 'Origin',
+//     },
+//   });
+//   return getResponseData(res);
+// };

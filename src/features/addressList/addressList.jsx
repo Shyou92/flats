@@ -48,7 +48,7 @@ const AddressList = () => {
       return;
     }
     flatsNumbers.filter((flatNumber) => {
-      if (flatNumber.flat === e.target.value) {
+      if (flatNumber.flat === e.target.value && flatNumber.typeId === 3) {
         dispatch(getFlatNumber(flatNumber.id));
       }
     });

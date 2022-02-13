@@ -1,93 +1,48 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { postClientData } from '../../shared/utils';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getClientsList } from '../../redux/actions';
+import { getTenantsData } from '../../shared/utils';
+import ClientItem from './clientItem/clientItem';
 
 const ClientList = () => {
-  const [data, setData] = useState({
-    name: '',
-    sirname: '',
-    patronymic: '',
-    email: '',
-    phone: '',
-  });
+  const dispatch = useDispatch();
 
   const singleFlatNumber = useSelector((state) => {
     return state.flats.singleFlat;
   });
 
-  const onChange = (e) => {
-    const { name } = e.target;
-    const value = e.target.value;
+  const tenantsList = useSelector((state) => {
+    return state.clients.clients.data;
+  });
 
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
+  useEffect(() => {
+    getClients();
+  }, [singleFlatNumber.id, dispatch]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await postClientData(data, singleFlatNumber).then((res) =>
-        console.log(res)
-      );
-    } catch (error) {
-      console.log(error);
+  const getClients = async () => {
+    if (singleFlatNumber.id === undefined) {
+      return;
     }
+    const fetch = await getTenantsData(singleFlatNumber.id);
+    dispatch(getClientsList(fetch));
   };
-  console.log(data);
-
+  console.log(tenantsList);
   return (
     <section>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='name'>Имя</label>
-        <input
-          type='text'
-          name='name'
-          id='name'
-          value={data.name}
-          onChange={onChange}
-        />
-
-        <label htmlFor='sirname'>Фамилия</label>
-        <input
-          type='text'
-          name='sirname'
-          id='sirname'
-          value={data.sirname}
-          onChange={onChange}
-        />
-
-        <label htmlFor='patronymic'>Отчество</label>
-        <input
-          type='text'
-          name='patronymic'
-          id='patronymic'
-          value={data.patronymic}
-          onChange={onChange}
-        />
-
-        <label htmlFor='email'>E-mail</label>
-        <input
-          type='email'
-          name='email'
-          id='email'
-          value={data.email}
-          onChange={onChange}
-        />
-
-        <label htmlFor='tel'>Номер телефона</label>
-        <input
-          type='tel'
-          name='phone'
-          id='tel'
-          value={data.phone}
-          required
-          onChange={onChange}
-        />
-
-        <button type='submit'>Тык</button>
-      </form>
+      {tenantsList === undefined ? (
+        <p>Здесь будут показаны жильцы квартир</p>
+      ) : (
+        tenantsList.map((t) => {
+          return (
+            <ClientItem
+              key={t.id}
+              name={t.name}
+              phone={t.phone}
+              email={t.email}
+            />
+          );
+        })
+      )}
     </section>
   );
 };
