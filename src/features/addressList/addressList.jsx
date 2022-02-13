@@ -21,7 +21,7 @@ const AddressList = () => {
   const flatsNumbers = useSelector((state) => {
     return state.flats.flatsNumbers;
   });
-
+  console.log();
   const handleStreet = (e) => {
     streets.filter((str) => {
       if (str.name === e.target.value) {
